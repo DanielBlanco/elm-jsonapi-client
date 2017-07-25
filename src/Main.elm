@@ -1,19 +1,34 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, div, img)
+import Html exposing (Html, div, img, li, ol, text)
 import Html.Attributes exposing (src)
+import Types exposing (..)
 
 
 ---- MODEL ----
 
 
 type alias Model =
-    {}
+    { countries : CountryCollection }
+
+
+initialPagination : Pagination
+initialPagination =
+    { pageNumber = 1
+    , pageSize = 5
+    , totalEntries = 0
+    , totalPages = 1
+    }
+
+
+initialCountryCollection : CountryCollection
+initialCountryCollection =
+    { meta = initialPagination, data = [ { id = "1", name = "test", insertedAt = "x", updatedAt = "" } ] }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( { countries = initialCountryCollection }, Cmd.none )
 
 
 
@@ -37,7 +52,24 @@ view : Model -> Html Msg
 view model =
     div []
         [ img [ src "/logo.svg" ] []
-        , div [] [ text "Your Elm App is working!" ]
+        , div []
+            [ text "Country List"
+            , ol [] (viewCountries model)
+            ]
+        ]
+
+
+viewCountries : Model -> List (Html Msg)
+viewCountries model =
+    model.countries.data
+        |> List.map viewCountry
+
+
+viewCountry : Country -> Html Msg
+viewCountry country =
+    li []
+        [ text country.name
+        , text (" (" ++ country.insertedAt ++ ")")
         ]
 
 
