@@ -1,7 +1,9 @@
 module Main exposing (..)
 
+import Api
 import Html exposing (Html, div, img, li, ol, text)
 import Html.Attributes exposing (src)
+import Msg exposing (Msg(..))
 import Types exposing (..)
 
 
@@ -28,20 +30,28 @@ initialCountryCollection =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { countries = initialCountryCollection }, Cmd.none )
+    update GetCountryCollection { countries = initialCountryCollection }
 
 
 
+--( { countries = initialCountryCollection }, Cmd.none )
 ---- UPDATE ----
-
-
-type Msg
-    = NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        GetCountryCollection ->
+            ( model, Api.getCountryCollection )
+
+        UpdateCountryCollection (Ok collection) ->
+            { model | countries = collection } ! []
+
+        UpdateCountryCollection (Err error) ->
+            Debug.log ("Oops!" ++ toString error) ( model, Cmd.none )
+
+        NoOp ->
+            ( model, Cmd.none )
 
 
 

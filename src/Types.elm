@@ -25,6 +25,5 @@ type alias CountryCollection =
     }
 
 
-
--- type alias ApiResult =
---     Result Http.Error JsonApi.Document
+type alias CountryCollectionResult =
+    Result Http.Error CountryCollection
