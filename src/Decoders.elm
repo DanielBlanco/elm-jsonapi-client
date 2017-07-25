@@ -57,6 +57,12 @@ paginationDecoder =
         |> required "total-pages" Json.Decode.int
 
 
+{-| Decodes a JSONAPI collection.
+
+NOTE: This function does not decode links but you should be able to add the code
+to so easily ;)
+
+-}
 countryCollectionDecoder : Decoder CountryCollection
 countryCollectionDecoder =
     decode CountryCollection
