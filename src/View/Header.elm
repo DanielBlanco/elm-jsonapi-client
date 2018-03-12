@@ -6,4 +6,5 @@ import Html.Attributes exposing (..)
 
 view : Html msg
 view =
+
     img [ src "/logo.svg" ] []

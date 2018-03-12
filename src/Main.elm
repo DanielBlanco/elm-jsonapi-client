@@ -54,7 +54,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [ class "container" ]
+    div []
         [ View.Header.view
         , View.Users.view model.users
         , View.Footer.view
