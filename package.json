@@ -1,0 +1,26 @@
+{
+  "name": "elm-jsonapi-client",
+  "version": "1.0.0",
+  "description": "Sample ELM app",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielBlanco/elm-jsonapi-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielBlanco/elm-jsonapi-client/issues"
+  },
+  "homepage": "https://github.com/DanielBlanco/elm-jsonapi-client#readme",
+  "devDependencies": {
+    "bulma": "^0.6.2"
+  }
+}
