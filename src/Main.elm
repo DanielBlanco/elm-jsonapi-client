@@ -1,36 +1,29 @@
 module Main exposing (..)
 
-import Api
+import Data.User as User exposing (User, Users)
 import Html exposing (Html, div, img, li, ol, text)
 import Html.Attributes exposing (src)
-import Msg exposing (Msg(..))
+import Http
+import Request.User exposing (UsersResult)
 import Types exposing (..)
 
 
 ---- MODEL ----
 
 
+type Msg
+    = NoOp
+    | GetUsers
+    | GotUsers UsersResult
+
+
 type alias Model =
-    { countries : CountryCollection }
-
-
-initialPagination : Pagination
-initialPagination =
-    { pageNumber = 1
-    , pageSize = 5
-    , totalEntries = 0
-    , totalPages = 1
-    }
-
-
-initialCountryCollection : CountryCollection
-initialCountryCollection =
-    { meta = initialPagination, data = [ { id = "1", name = "test", insertedAt = "x", updatedAt = "" } ] }
+    { users : Users }
 
 
 init : ( Model, Cmd Msg )
 init =
-    update GetCountryCollection { countries = initialCountryCollection }
+    update GetUsers { users = [] }
 
 
 
@@ -41,17 +34,17 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        GetCountryCollection ->
-            ( model, Api.getCountryCollection )
-
-        UpdateCountryCollection (Ok collection) ->
-            { model | countries = collection } ! []
-
-        UpdateCountryCollection (Err error) ->
-            Debug.log ("Oops!" ++ toString error) ( model, Cmd.none )
-
         NoOp ->
             ( model, Cmd.none )
+
+        GetUsers ->
+            ( model, Request.User.index |> Http.send GotUsers )
+
+        GotUsers (Ok users) ->
+            { model | users = users } ! []
+
+        GotUsers (Err error) ->
+            Debug.log ("Oops!" ++ toString error) ( model, Cmd.none )
 
 
 
@@ -63,23 +56,21 @@ view model =
     div []
         [ img [ src "/logo.svg" ] []
         , div []
-            [ text "Country List"
-            , ol [] (viewCountries model)
+            [ text "User List"
+            , ol [] (viewUsers model.users)
             ]
         ]
 
 
-viewCountries : Model -> List (Html Msg)
-viewCountries model =
-    model.countries.data
-        |> List.map viewCountry
+viewUsers : Users -> List (Html Msg)
+viewUsers users =
+    List.map viewUser users
 
 
-viewCountry : Country -> Html Msg
-viewCountry country =
+viewUser : User -> Html Msg
+viewUser user =
     li []
-        [ text country.name
-        , text (" (" ++ country.insertedAt ++ ")")
+        [ text <| User.fullName user
         ]
 
 

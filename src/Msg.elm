@@ -5,5 +5,5 @@ import Types exposing (..)
 
 type Msg
     = NoOp
-    | GetCountryCollection
-    | UpdateCountryCollection CountryCollectionResult
+    | GetUsers
+    | GotUsers UsersResult
