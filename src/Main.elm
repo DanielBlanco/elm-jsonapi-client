@@ -5,7 +5,6 @@ import Html exposing (Html, div, img, li, ol, text)
 import Html.Attributes exposing (src)
 import Http
 import Request.User exposing (UsersResult)
-import Types exposing (..)
 
 
 ---- MODEL ----
