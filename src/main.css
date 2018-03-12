@@ -11,11 +11,11 @@ body {
   margin: 0;
 }
 
-img {
-  margin: 20px 0;
-  max-width: 100px;
+img.logo {
+  margin: 10px 0;
+  max-width: 50px;
 }
 
 .min-list-size {
-  min-height: calc(100vh - 315px);
+  min-height: calc(100vh - 365px);
 }
