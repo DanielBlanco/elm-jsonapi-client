@@ -8,7 +8,7 @@ information in a pretty [Bulma](https://bulma.io) template.
 ## Site Demo:
 https://danielblanco.github.io/elm-jsonapi-client/
 
-## Leasons learned
+## Lessons learned
 
 #### Images
 Handling images is a bit tricky, in this app I follow two different approaches.
