@@ -12,6 +12,11 @@ import View.Users exposing (view)
 ---- MODEL ----
 
 
+type alias Flags =
+    { imgLogo : String
+    }
+
+
 type Msg
     = NoOp
     | GetUsers
@@ -19,14 +24,15 @@ type Msg
 
 
 type alias Model =
-    { users : Users
+    { flags : Flags
+    , users : Users
     , error : String
     }
 
 
-init : ( Model, Cmd Msg )
-init =
-    update GetUsers { users = [], error = defaultError }
+init : Flags -> ( Model, Cmd Msg )
+init flags =
+    update GetUsers { flags = flags, users = [], error = defaultError }
 
 
 defaultError : String
@@ -53,7 +59,7 @@ update msg model =
         GotUsers (Err error) ->
             let
                 newModel =
-                    { model | error = "Error retrieving data!" }
+                    { model | error = "Error retrieving data!", users = [] }
             in
             Debug.log ("Oops!" ++ model.error) ( newModel, Cmd.none )
 
@@ -65,8 +71,14 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ View.Header.view { onRefresh = GetUsers }
-        , View.Users.view model.users model.error
+        [ View.Header.view
+            { onRefresh = GetUsers
+            , imgLogo = model.flags.imgLogo
+            }
+        , View.Users.view
+            { users = model.users
+            , alert = model.error
+            }
         , View.Footer.view
         ]
 
@@ -75,9 +87,9 @@ view model =
 ---- PROGRAM ----
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    Html.program
+    Html.programWithFlags
         { view = view
         , init = init
         , update = update

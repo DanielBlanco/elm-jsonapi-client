@@ -10,7 +10,7 @@ type alias UsersResult =
     Result Http.Error Users
 
 
-{-| Retrieves a list of users.
+{-| Retrieves a list of users from the API.
 -}
 index : Http.Request Users
 index =

@@ -14,12 +14,8 @@ type alias Picture =
     }
 
 
-src : URL -> Attribute msg
-src =
-    toUrl >> Html.Attributes.src
-
-
-{-| -}
+{-| Default Picture record.
+-}
 default : Picture
 default =
     { large = URL.default
@@ -28,25 +24,30 @@ default =
     }
 
 
-toUrl : URL -> String
-toUrl url =
+{-| Returns a HTML src attribute to be used in <img> element.
+-}
+src : URL -> Attribute msg
+src =
+    toStringUrl >> Html.Attributes.src
+
+
+{-| Returns a String URL
+-}
+toStringUrl : URL -> String
+toStringUrl url =
     let
         maybeString =
             URL.toMaybeString url
     in
     case maybeString of
         Nothing ->
-            "/images/ghost.svg"
+            "https://s3-us-west-2.amazonaws.com/cdn.danielblancorojas.com/images/ghost.svg"
 
         Just url ->
             url
 
 
-
--- DECODERS --
-
-
-{-| Decode.map Picture (Decode.nullable Decode.string)
+{-| Decodes a picture.
 -}
 decoder : Decoder Picture
 decoder =
@@ -54,11 +55,3 @@ decoder =
         |> required "large" URL.decoder
         |> required "medium" URL.decoder
         |> required "thumbnail" URL.decoder
-
-
-
--- maybeBlank : Decoder (Maybe String)
--- maybeBlank =
---     Decode.string
---         |> Decode.andThen (validateString >> fromResult)
---         |> Decode.maybe

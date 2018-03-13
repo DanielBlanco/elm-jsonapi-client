@@ -39,11 +39,15 @@ fullName user =
 ---- DECODERS ----
 
 
+{-| Decodes a list of User.
+-}
 listDecoder : Decoder Users
 listDecoder =
     D.at [ "results" ] (D.list decoder)
 
 
+{-| Decodes a single User.
+-}
 decoder : Decoder User
 decoder =
     decode User

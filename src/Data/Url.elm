@@ -7,13 +7,15 @@ type URL
     = URL (Maybe String)
 
 
-{-| -}
+{-| URL defaults to Nothing.
+-}
 default : URL
 default =
     URL Nothing
 
 
-{-| -}
+{-| Returns the Maybe String.
+-}
 toMaybeString : URL -> Maybe String
 toMaybeString (URL maybeUrl) =
     maybeUrl

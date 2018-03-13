@@ -6,21 +6,29 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-view : Users -> String -> Html msg
-view users alert =
-    vUsers users alert |> vContainer
+type alias Config =
+    { users : Users
+    , alert : String
+    }
 
 
-vUsers : Users -> String -> Html msg
-vUsers users alert =
+view : Config -> Html msg
+view config =
+    vUsers config |> vContainer
+
+
+vUsers : Config -> Html msg
+vUsers config =
     let
-        isEmpty =
-            List.isEmpty users
+        showAlert =
+            List.isEmpty config.users
     in
-    if isEmpty then
-        alert |> vAlert
+    if showAlert then
+        vAlert config.alert
     else
-        users |> List.map vUser |> div [ class "columns is-multiline is-gapless" ]
+        config.users
+            |> List.map vUser
+            |> div [ class "columns is-multiline is-gapless" ]
 
 
 vContainer : Html msg -> Html msg

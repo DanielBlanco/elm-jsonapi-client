@@ -7,6 +7,7 @@ import Html.Events exposing (onClick)
 
 type alias Config msg =
     { onRefresh : msg
+    , imgLogo : String
     }
 
 
@@ -15,13 +16,13 @@ view config =
     section [ class "hero is-primary" ]
         [ div
             [ class "hero-body" ]
-            [ imgLogo, title, refreshBtn config.onRefresh ]
+            [ imgLogo config.imgLogo, title, refreshBtn config.onRefresh ]
         ]
 
 
-imgLogo : Html msg
-imgLogo =
-    img [ class "logo", src "%PUBLIC_URL%/logo.svg" ] []
+imgLogo : String -> Html msg
+imgLogo path =
+    img [ class "logo", src path ] []
 
 
 title : Html msg
