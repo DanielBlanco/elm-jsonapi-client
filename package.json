@@ -20,7 +20,9 @@
     "url": "https://github.com/DanielBlanco/elm-jsonapi-client/issues"
   },
   "homepage": "https://github.com/DanielBlanco/elm-jsonapi-client#readme",
-  "devDependencies": {
-    "bulma": "^0.6.2"
+  "devDependencies": { },
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "font-awesome": "^4.7.0"
   }
 }

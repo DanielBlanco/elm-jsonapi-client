@@ -55,7 +55,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ View.Header.view
+        [ View.Header.view { onRefresh = GetUsers }
         , View.Users.view model.users
         , View.Footer.view
         ]
