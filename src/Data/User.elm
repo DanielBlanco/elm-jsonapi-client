@@ -14,19 +14,12 @@ type alias Email =
     String
 
 
-type alias UserID =
-    { name : String
-    , value : String
-    }
-
-
 type alias Users =
     List User
 
 
 type alias User =
-    { id : UserID
-    , title : String
+    { title : String
     , firstName : String
     , lastName : String
     , email : Email
@@ -53,16 +46,8 @@ listDecoder =
 decoder : Decoder User
 decoder =
     decode User
-        |> required "id" idDecoder
         |> requiredAt [ "name", "title" ] D.string
         |> requiredAt [ "name", "first" ] D.string
         |> requiredAt [ "name", "last" ] D.string
         |> required "email" D.string
         |> required "picture" Picture.decoder
-
-
-idDecoder : Decoder UserID
-idDecoder =
-    decode UserID
-        |> required "name" D.string
-        |> required "value" D.string

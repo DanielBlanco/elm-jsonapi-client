@@ -2,7 +2,6 @@ module Main exposing (..)
 
 import Data.User as User exposing (User, Users)
 import Html exposing (Html, div)
-import Html.Attributes exposing (class)
 import Http
 import Request.User exposing (UsersResult)
 import View.Footer exposing (view)
@@ -20,12 +19,19 @@ type Msg
 
 
 type alias Model =
-    { users : Users }
+    { users : Users
+    , error : String
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    update GetUsers { users = [] }
+    update GetUsers { users = [], error = defaultError }
+
+
+defaultError : String
+defaultError =
+    "No data to show"
 
 
 
@@ -45,7 +51,11 @@ update msg model =
             { model | users = users } ! []
 
         GotUsers (Err error) ->
-            Debug.log ("Oops!" ++ toString error) ( model, Cmd.none )
+            let
+                newModel =
+                    { model | error = "Error retrieving data!" }
+            in
+            Debug.log ("Oops!" ++ model.error) ( newModel, Cmd.none )
 
 
 
@@ -56,7 +66,7 @@ view : Model -> Html Msg
 view model =
     div []
         [ View.Header.view { onRefresh = GetUsers }
-        , View.Users.view model.users
+        , View.Users.view model.users model.error
         , View.Footer.view
         ]
 

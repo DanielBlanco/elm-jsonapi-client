@@ -5,19 +5,21 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-view : Users -> Html msg
-view users =
+view : Users -> String -> Html msg
+view users alert =
+    vUsers users alert |> vContainer
+
+
+vUsers : Users -> String -> Html msg
+vUsers users alert =
     let
         isEmpty =
             List.isEmpty users
     in
     if isEmpty then
-        vEmptyMessage |> vContainer
+        alert |> vAlert
     else
-        users
-            |> List.map vUser
-            |> ol []
-            |> vContainer
+        users |> List.map vUser |> ol []
 
 
 vContainer : Html msg -> Html msg
@@ -25,11 +27,11 @@ vContainer data =
     div [ class "min-list-size" ] [ data ]
 
 
-vEmptyMessage : Html msg
-vEmptyMessage =
+vAlert : String -> Html msg
+vAlert alert =
     div [ class "container has-text-centered is-centered" ]
         [ article [ class "message is-warning " ]
-            [ div [ class "message-body" ] [ text "No data to show" ] ]
+            [ div [ class "message-body" ] [ text alert ] ]
         ]
 
 
