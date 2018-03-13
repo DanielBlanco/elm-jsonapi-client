@@ -14,7 +14,7 @@ type alias UsersResult =
 -}
 index : Http.Request Users
 index =
-    "https://randomuser.me/api/?results=10"
+    "https://randomuser.me/api/?results=12"
         |> HttpBuilder.get
         |> HttpBuilder.withHeader "Accept" "application/vnd.api+json"
         |> HttpBuilder.withTimeout (30 * Time.second)

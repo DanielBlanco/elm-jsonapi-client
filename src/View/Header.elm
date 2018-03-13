@@ -28,13 +28,13 @@ title : Html msg
 title =
     h5
         [ class "is-uppercase has-text-weight-bold" ]
-        [ text "User List" ]
+        [ text "User List from https://randomuser.me" ]
 
 
 refreshBtn : msg -> Html msg
 refreshBtn msg =
     button
-        [ class "button is-rounded is-info is-small"
+        [ class "button is-rounded is-info is-small mt-2"
         , onClick msg
         ]
         [ span [ class "icon" ]

@@ -24,6 +24,7 @@ type alias User =
     , lastName : String
     , email : Email
     , picture : Picture
+    , phone : String
     }
 
 
@@ -31,7 +32,7 @@ type alias User =
 -}
 fullName : User -> String
 fullName user =
-    user.title ++ " " ++ user.firstName ++ " " ++ user.lastName
+    user.title ++ ". " ++ user.firstName ++ " " ++ user.lastName
 
 
 
@@ -51,3 +52,4 @@ decoder =
         |> requiredAt [ "name", "last" ] D.string
         |> required "email" D.string
         |> required "picture" Picture.decoder
+        |> required "phone" D.string

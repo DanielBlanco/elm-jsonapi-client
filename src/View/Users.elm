@@ -39,37 +39,13 @@ vAlert alert =
 vUser : User -> Html msg
 vUser user =
     div [ class "column is-full-mobile is-half-tablet is-one-quarter-desktop" ]
-        [ div [ class "card" ]
+        [ div
+            [ class "card" ]
             [ vCardImage user
-            , div [ class "card-content" ]
-                [ div [ class "media" ]
-                    [ div [ class "media-left" ]
-                        [ figure [ class "image is-48x48" ]
-                            [ img [ alt "Placeholder image", src "https://bulma.io/images/placeholders/96x96.png" ]
-                                []
-                            ]
-                        ]
-                    , div [ class "media-content" ]
-                        [ p [ class "title is-4" ]
-                            [ text "John Smith" ]
-                        , p [ class "subtitle is-6" ]
-                            [ text "@johnsmith" ]
-                        ]
-                    ]
-                , div [ class "content" ]
-                    [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit.      Phasellus nec iaculis mauris. "
-                    , a []
-                        [ text "@bulmaio" ]
-                    , text ".      "
-                    , a [ href "#" ]
-                        [ text "#css" ]
-                    , a [ href "#" ]
-                        [ text "#responsive" ]
-                    , br []
-                        []
-                    , time [ datetime "2016-1-1" ]
-                        [ text "11:09 PM - 1 Jan 2016" ]
-                    ]
+            , div
+                [ class "card-content" ]
+                [ vCardMedia user
+                , vCardContent user
                 ]
             ]
         ]
@@ -85,4 +61,25 @@ vCardImage user =
                 ]
                 []
             ]
+        ]
+
+
+vCardMedia : User -> Html msg
+vCardMedia user =
+    div [ class "media" ]
+        [ div
+            [ class "media-content has-text-centered" ]
+            [ p [ class "title is-4 is-capitalized text-ellipsis" ]
+                [ text <| User.fullName user ]
+            , p [ class "subtitle is-6" ]
+                [ text user.email ]
+            ]
+        ]
+
+
+vCardContent : User -> Html msg
+vCardContent user =
+    div [ class "content has-text-grey" ]
+        [ i [ class "fa fa-phone mr-2" ] []
+        , text user.phone
         ]
