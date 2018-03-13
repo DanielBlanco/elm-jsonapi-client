@@ -53,7 +53,7 @@ vUser user =
 
 vCardImage : User -> Html msg
 vCardImage user =
-    div [ class "card-image has-text-centered" ]
+    div [ class "card-image has-text-centered p-1" ]
         [ figure [ class "avatar image is-128x128 is-rounded is-centered" ]
             [ img
                 [ alt <| User.fullName user

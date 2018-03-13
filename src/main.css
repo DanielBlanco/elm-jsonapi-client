@@ -9,6 +9,7 @@ body {
 
 #root {
   margin: 0;
+  background-color: #f9f9f9;
 }
 
 img.logo {
@@ -34,6 +35,9 @@ img.logo {
   background-color: white;
   -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+.p-1 {
+  padding: 0.25rem;
 }
 
 .mr-1 {
@@ -61,4 +65,8 @@ img.logo {
 
 .list li {
   list-style: none;
+}
+
+.card:hover {
+  background-color: #ccc;
 }

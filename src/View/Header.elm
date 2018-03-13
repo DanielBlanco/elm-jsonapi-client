@@ -21,7 +21,7 @@ view config =
 
 imgLogo : Html msg
 imgLogo =
-    img [ class "logo", src "/logo.svg" ] []
+    img [ class "logo", src "%PUBLIC_URL%/logo.svg" ] []
 
 
 title : Html msg
