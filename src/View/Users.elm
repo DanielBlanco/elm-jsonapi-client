@@ -7,11 +7,29 @@ import Html.Attributes exposing (..)
 
 view : Users -> Html msg
 view users =
-    div [ class "min-list-size" ]
-        [ text "User List"
-        , users
+    let
+        isEmpty =
+            List.isEmpty users
+    in
+    if isEmpty then
+        vEmptyMessage |> vContainer
+    else
+        users
             |> List.map vUser
             |> ol []
+            |> vContainer
+
+
+vContainer : Html msg -> Html msg
+vContainer data =
+    div [ class "min-list-size" ] [ data ]
+
+
+vEmptyMessage : Html msg
+vEmptyMessage =
+    div [ class "container has-text-centered is-centered" ]
+        [ article [ class "message is-warning " ]
+            [ div [ class "message-body" ] [ text "No data to show" ] ]
         ]
 
 
