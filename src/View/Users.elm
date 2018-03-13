@@ -1,5 +1,6 @@
 module View.Users exposing (..)
 
+import Data.Picture as Picture
 import Data.User as User exposing (User, Users)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -19,12 +20,12 @@ vUsers users alert =
     if isEmpty then
         alert |> vAlert
     else
-        users |> List.map vUser |> div [ class "columns is-multiline is-mobile" ]
+        users |> List.map vUser |> div [ class "columns is-multiline is-gapless" ]
 
 
 vContainer : Html msg -> Html msg
 vContainer data =
-    div [ class "container min-list-size" ] [ data ]
+    div [ class "container min-list-size mt-4 mb-4" ] [ data ]
 
 
 vAlert : String -> Html msg
@@ -39,12 +40,7 @@ vUser : User -> Html msg
 vUser user =
     div [ class "column is-full-mobile is-half-tablet is-one-quarter-desktop" ]
         [ div [ class "card" ]
-            [ div [ class "card-image" ]
-                [ figure [ class "image is-4by3" ]
-                    [ img [ alt "Placeholder image", src "https://bulma.io/images/placeholders/1280x960.png" ]
-                        []
-                    ]
-                ]
+            [ vCardImage user
             , div [ class "card-content" ]
                 [ div [ class "media" ]
                     [ div [ class "media-left" ]
@@ -75,5 +71,18 @@ vUser user =
                         [ text "11:09 PM - 1 Jan 2016" ]
                     ]
                 ]
+            ]
+        ]
+
+
+vCardImage : User -> Html msg
+vCardImage user =
+    div [ class "card-image has-text-centered" ]
+        [ figure [ class "avatar image is-128x128 is-rounded is-centered" ]
+            [ img
+                [ alt <| User.fullName user
+                , Picture.src user.picture.large
+                ]
+                []
             ]
         ]

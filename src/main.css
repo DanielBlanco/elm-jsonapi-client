@@ -19,3 +19,27 @@ img.logo {
 .min-list-size {
   min-height: calc(100vh - 365px);
 }
+
+.image.is-rounded img {
+  border-radius: 50%;
+}
+
+.image.is-centered {
+  text-align: center;
+  margin: auto;
+}
+
+.avatar img {
+  padding: 5px;
+  background-color: white;
+  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+
+
+.mt-4 {
+  margin-top: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
